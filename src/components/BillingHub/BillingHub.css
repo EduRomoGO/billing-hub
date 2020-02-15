@@ -28,3 +28,8 @@
 .b-merchant-list__item:first-child {
   border-top: 1px solid black;
 }
+
+
+.b-merchants__title {
+  text-align: left;
+}

@@ -9,7 +9,7 @@ const BillingHub = () => {
 
   useEffect(() => {
     axios.get('http://interview.dekopay.com.s3.eu-west-2.amazonaws.com/merchants.json')
-      .then(({data}) => {
+      .then(({ data }) => {
         setMerchants(data);
       })
       .catch(err => { throw new Error(err) });
@@ -18,7 +18,7 @@ const BillingHub = () => {
 
   const handleMerchantClick = (merchant_id) => {
     axios.get(`http://interview.dekopay.com.s3.eu-west-2.amazonaws.com/merchants/${merchant_id}.json`)
-      .then(({data}) => setMerchantDetails(data))
+      .then(({ data }) => setMerchantDetails(data))
       .catch(err => { throw new Error(err) });
   }
 
@@ -28,14 +28,16 @@ const BillingHub = () => {
 
   return <section className='c-billing-hub'>
     <article className='c-billing-hub__aside'>
-      <header>
-        <h1>Merchants</h1>
-      </header>
-      <nav className='c-billing-hub__nav'>
-        <ul className='b-merchant-list'>
-          {renderMerchantList(merchants)}
-        </ul>
-      </nav>
+      <section className='b-merchants'>
+        <header>
+          <h1 className='b-merchants__title'>Merchants</h1>
+        </header>
+        <nav className='c-billing-hub__nav'>
+          <ul className='b-merchant-list'>
+            {renderMerchantList(merchants)}
+          </ul>
+        </nav>
+      </section>
     </article>
     <section className='c-billing-hub__merchant-details-wrapper'>
       <MerchantDetails details={merchantDetails} />

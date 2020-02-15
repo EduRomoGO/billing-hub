@@ -88,8 +88,14 @@ describe('Billing hub', () => {
     const subsidy = getByText('35');
     expect(subsidy).toBeInTheDocument();
 
+    const table = document.querySelector('table');
+    expect(table).toBeInTheDocument();
 
-    const tableItems = document.querySelectorAll('td')
+    const tableColumns = document.querySelectorAll('th');
+    expect(tableColumns.length).toBe(4);
+
+    const tableRows = document.querySelectorAll('tr');
+    expect(tableRows.length).toBe(4);
   });
 
 });

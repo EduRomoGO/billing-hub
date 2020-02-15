@@ -28,15 +28,15 @@ describe('Billing hub', () => {
     const transactions = [
       {
         "description": "Soft Chips",
-        "price": 2923,
+        "price": 100,
       },
       {
         "description": "Awesome Frozen Chips",
-        "price": 1958,
+        "price": 200,
       },
       {
         "description": "Car",
-        "price": 566,
+        "price": 300,
       }
     ];
     const respMerchantDetails = { data: {
@@ -77,7 +77,10 @@ describe('Billing hub', () => {
 
     expect(document.querySelector('.c-merchant-details__name').textContent).toBe('reale');
 
-    // count, total, subsidy
+    const total = getByText('600');
+    expect(total).toBeInTheDocument();
+
+    // total, subsidy
   });
 
 });

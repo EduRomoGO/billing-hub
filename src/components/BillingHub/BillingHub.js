@@ -17,8 +17,12 @@ const BillingHub = () => {
   }, []);
 
   return <section className='c-billing-hub'>
-    <article className='b-merchant-list'>
-      {merchants.map(({name, merchant_id}) => <li key={merchant_id}>{name}</li>)}
+    <article className='c-billing-hub__aside'>
+      <nav className='c-billing-hub__nav'>
+        <ul className='b-merchant-list'>
+          {merchants.slice(0, 6).map(({ name, merchant_id }) => <li className='b-merchant-list__item' key={merchant_id}>{name}</li>)}
+        </ul>
+      </nav>
     </article>
   </section>
 };

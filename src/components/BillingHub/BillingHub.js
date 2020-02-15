@@ -29,7 +29,7 @@ const BillingHub = () => {
   return <section className='c-billing-hub'>
     <article className='c-billing-hub__aside'>
       <header>
-        <h1>hola</h1>
+        <h1>Merchants</h1>
       </header>
       <nav className='c-billing-hub__nav'>
         <ul className='b-merchant-list'>

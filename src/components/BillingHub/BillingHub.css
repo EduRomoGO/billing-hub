@@ -1,0 +1,7 @@
+.c-billing-hub {
+  background-color: red;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(400px, 3fr);
+  /* grid-template-rows: 1fr; */
+  min-height: 100vh;
+}

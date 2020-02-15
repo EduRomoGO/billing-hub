@@ -18,7 +18,9 @@ const BillingHub = () => {
 
   const handleMerchantClick = (merchant_id) => {
     axios.get(`http://interview.dekopay.com.s3.eu-west-2.amazonaws.com/merchants/${merchant_id}.json`)
-      .then(({ data }) => setMerchantDetails(data))
+      .then(({ data }) => {
+        setMerchantDetails(data)
+      })
       .catch(err => { throw new Error(err) });
   }
 

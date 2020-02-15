@@ -1,10 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait, fireEvent, waitForElement } from '@testing-library/react';
 import BillingHub from './BillingHub.js';
 import axios from 'axios';
 
 jest.mock('axios');
-jest.mock('../MerchantDetails/MerchantDetails.js', () => () => <div></div>);
+// jest.mock('../MerchantDetails/MerchantDetails.js', () => () => <div></div>);
 
 afterEach(() => {
   jest.resetAllMocks()
@@ -13,7 +13,7 @@ afterEach(() => {
 describe('Billing hub', () => {
   it('renders correctly', async () => {
 
-    const resp = {
+    const respMerchants = {
       data: [
         {
           name: 'reale',
@@ -25,10 +25,30 @@ describe('Billing hub', () => {
         },
       ]
     };
-    const names = resp.data.map(item => item.name);
-    axios.get.mockResolvedValueOnce(resp);
 
-    const { getAllByRole, findByRole } = render(<BillingHub />);
+    const transactions = [
+      {
+        "description": "Soft Chips",
+        "price": 2923,
+      },
+      {
+        "description": "Awesome Frozen Chips",
+        "price": 1958,
+      },
+      {
+        "description": "Car",
+        "price": 566,
+      }
+    ];
+    const respMerchantDetails = { data: transactions };
+    const names = respMerchants.data.map(item => item.name);
+    // axios.get.mockResolvedValueOnce(resp);
+    axios.get.mockResolvedValueOnce(respMerchants)
+      .mockResolvedValueOnce(respMerchantDetails);
+
+    const { getByText, getAllByRole, findByRole } = render(<BillingHub />);
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
 
     const titleEl = await findByRole('heading');
     expect(titleEl).toHaveTextContent('Merchants');
@@ -37,6 +57,16 @@ describe('Billing hub', () => {
     expect(topicElsText).toEqual(names)
 
     expect(document.querySelector('.b-merchant-list')).toBeInTheDocument();
+
+    fireEvent.click(getByText('reale'));
+    await wait();
+
+    expect(axios.get).toHaveBeenCalledTimes(2);
+
+    const count = getByText('3');
+    expect(count).toBeInTheDocument();
+
+    // count, total, subsidy
   });
 
 });

@@ -43,9 +43,9 @@ describe('Billing hub', () => {
       transactions,
       name: 'reale',
       pricing: {
-        "subsidy": 9,
-        "discount_subsidy": 6,
-        "discount_cutoff": 600
+        "subsidy": 10,
+        "discount_subsidy": 5,
+        "discount_cutoff": 200
       },
     } };
     const names = respMerchants.data.map(item => item.name);
@@ -70,6 +70,8 @@ describe('Billing hub', () => {
 
     expect(axios.get).toHaveBeenCalledTimes(2);
 
+    // The following use of getByText probably should be replaced by getByTestId to be more meaningfull and to avoid false positives just finding any other place where this numbers could be rendered by chance
+
     const count = getByText('3');
     expect(count).toBeInTheDocument();
 
@@ -80,7 +82,8 @@ describe('Billing hub', () => {
     const total = getByText('600');
     expect(total).toBeInTheDocument();
 
-    // total, subsidy
+    const subsidy = getByText('35');
+    expect(subsidy).toBeInTheDocument();
   });
 
 });

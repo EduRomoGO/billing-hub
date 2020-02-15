@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
+import BillingHub from './components/BillingHub/BillingHub.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <BillingHub />
     </div>
   );
 }

@@ -36,6 +36,9 @@ const renderTable = (transactions, pricing) => {
 
 const MerchantDetails = ({ name, transactions, pricing }) => {
   return <article className='c-merchant-details'>
+    <header>
+      <h1>Transactions</h1>
+    </header>
     <div className='c-merchant-details__name'>{name}</div>
     <div className='c-merchant-details__total'>{transactions ? getTotal({ transactions }) : ''}</div>
     <div className='c-merchant-details__subsidy'>{transactions ? getSubsidy({ prices: transactions.map(item => item.price), pricing }) : ''}</div>

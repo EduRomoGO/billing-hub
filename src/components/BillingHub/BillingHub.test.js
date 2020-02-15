@@ -12,6 +12,9 @@ afterEach(() => {
 describe('Billing hub', () => {
   it('renders correctly', async () => {
 
+    // ***************
+    // Mock api calls
+    // ***************
     const respMerchants = {
       data: [
         {
@@ -55,26 +58,41 @@ describe('Billing hub', () => {
 
     axios.get.mockResolvedValueOnce(respMerchants)
       .mockResolvedValueOnce(respMerchantDetails);
+    // ***************
 
-    const { getAllByText, getByText, getAllByRole, findByRole } = render(<BillingHub />);
 
+
+    const { getAllByText, getByText, getAllByRole, findAllByRole } = render(<BillingHub />);
+
+
+
+    // ***************
+    // Merchants asserts
+    // ***************
     expect(axios.get).toHaveBeenCalledTimes(1);
 
-    const titleEl = await findByRole('heading');
+    const titleEl = (await findAllByRole('heading'))[0];
     expect(titleEl).toHaveTextContent('Merchants');
 
     const topicElsText = getAllByRole('listitem').map(el => el.textContent)
     expect(topicElsText).toEqual(names)
 
     expect(document.querySelector('.b-merchant-list')).toBeInTheDocument();
+    // ***************
 
+
+
+    // ***************
+    // Merchant details asserts
+    // ***************
     fireEvent.click(getByText('reale'));
     await wait();
 
     expect(axios.get).toHaveBeenCalledTimes(2);
+    expect(getByText('Transactions')).toBeInTheDocument();
 
+    // Summary asserts
     // The following use of getByText probably should be replaced by getByTestId to be more meaningfull and to avoid false positives just finding any other place where this numbers could be rendered by chance
-
     const count = getByText('3');
     expect(count).toBeInTheDocument();
 
@@ -88,6 +106,9 @@ describe('Billing hub', () => {
     const subsidy = getByText('35');
     expect(subsidy).toBeInTheDocument();
 
+
+
+    // Table asserts
     const table = document.querySelector('table');
     expect(table).toBeInTheDocument();
 
@@ -97,5 +118,6 @@ describe('Billing hub', () => {
     const tableRows = document.querySelectorAll('tr');
     expect(tableRows.length).toBe(4);
   });
+  // ***************
 
 });

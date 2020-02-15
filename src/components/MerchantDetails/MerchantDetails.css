@@ -9,3 +9,7 @@ tbody tr:nth-child(odd) {
 table {
   border-collapse: collapse;
 }
+
+thead {
+  background-color: #9393e8;
+}

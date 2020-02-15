@@ -1,14 +1,31 @@
+/* ************** */
+/* Main view */
+/* ************** */
+
+
 .c-billing-hub {
   background-color: red;
-  display: grid;
-  grid-template-columns: minmax(300px, 1fr) minmax(400px, 3fr);
-  /* grid-template-rows: 1fr; */
-  min-height: 100vh;
+  display: flex;
 }
 
 .c-billing-hub__aside {
   padding: 1.5rem;
+  flex: 1 0 25%;
 }
+
+.c-billing-hub__main {
+  flex: 3 0 75%;
+}
+
+
+
+
+
+
+
+/* ************** */
+/* Merchants list */
+/* ************** */
 
 
 .b-merchant-list {

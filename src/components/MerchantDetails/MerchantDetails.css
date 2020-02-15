@@ -1,5 +1,72 @@
+.c-merchant-details {
+  background-color: blue;
+  padding: 20px;
+}
+
+
+
+/* ************** */
+/* Summary */
+/* ************** */
+
+.c-merchant-details__summary {
+  display: flex;
+  background: yellow;
+}
+
+.c-merchant-details__name {
+  padding-bottom: 1rem;
+}
+
+
+.c-merchant-details__summary-overview-wrapper {
+  flex: 4 0 75%;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 8px;
+}
+
+
+.c-merchant-details__overview {
+  display: flex;
+  background-color: brown;
+  width: 100%;
+}
+
+.c-merchant-details__count, .c-merchant-details__total, .c-merchant-details__subsidy {
+  flex-grow: 1;
+}
+
+.c-merchant-details__count-value, .c-merchant-details__total-value, .c-merchant-details__subsidy-value {
+  font-weight: bold;
+}
+
+.c-merchant-details__summary-pie {
+  flex: 1 0 25%;
+}
+
+
+
+
+
+
+/* ************** */
+/* Table */
+/* ************** */
+
+.c-merchant-details__table-wrapper {
+  padding-top: 1.5rem;
+}
+
 table, th, td {
   border: 1px solid #333;
+  text-align: left;
+}
+
+th {
+  text-transform: capitalize;
 }
 
 tbody tr:nth-child(odd) {
@@ -8,6 +75,7 @@ tbody tr:nth-child(odd) {
 
 table {
   border-collapse: collapse;
+  width: 100%;
 }
 
 thead {

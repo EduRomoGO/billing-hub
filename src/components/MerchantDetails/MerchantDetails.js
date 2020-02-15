@@ -16,7 +16,7 @@ const renderTableHeader = transactions => {
 const renderTableRow = (item, id, pricing) => {
   return <tr key={id}>
     {Object.keys(item).map(category => <td key={category}>{item[category]}</td>)}
-    <td>{getSubsidy({ prices: [item.price] ,pricing })}</td>
+    <td>{getSubsidy({ prices: [item.price], pricing })}</td>
   </tr>;
 };
 
@@ -36,14 +36,36 @@ const renderTable = (transactions, pricing) => {
 
 const MerchantDetails = ({ name, transactions, pricing }) => {
   return <article className='c-merchant-details'>
-    <header>
-      <h1>Transactions</h1>
-    </header>
-    <div className='c-merchant-details__name'>{name}</div>
-    <div className='c-merchant-details__total'>{transactions ? getTotal({ transactions }) : ''}</div>
-    <div className='c-merchant-details__subsidy'>{transactions ? getSubsidy({ prices: transactions.map(item => item.price), pricing }) : ''}</div>
-    <div className='c-merchant-details__count'>{transactions ? transactions.length : ''}</div>
-    {transactions ? renderTable(transactions, pricing) : ''}
+    <section className='c-merchant-details__summary'>
+      <div className='c-merchant-details__summary-overview-wrapper'>
+        <header>
+          <h1 className='h1'>Transactions</h1>
+        </header>
+        <div className='c-merchant-details__name'>
+          <div className='c-merchant-details__name-text'>{name}</div>
+        </div>
+        <section className='c-merchant-details__overview'>
+          <article className='c-merchant-details__count'>
+            <div>Count</div>
+            <div className='c-merchant-details__count-value'>{transactions ? transactions.length : ''}</div>
+          </article>
+          <article className='c-merchant-details__total'>
+            <div>Total</div>
+            <div className='c-merchant-details__total-value'>{transactions ? getTotal({ transactions }) : ''}</div>
+          </article>
+          <article className='c-merchant-details__subsidy'>
+            <div>Subsidy</div>
+            <div className='c-merchant-details__subsidy-value'>{transactions ? getSubsidy({ prices: transactions.map(item => item.price), pricing }) : ''}</div>
+          </article>
+        </section>
+      </div>
+      <div className='c-merchant-details__summary-pie'>
+        pie
+      </div>
+    </section>
+    <div className='c-merchant-details__table-wrapper'>
+      {transactions ? renderTable(transactions, pricing) : ''}
+    </div>
   </article>;
 }
 

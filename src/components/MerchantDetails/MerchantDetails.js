@@ -13,22 +13,23 @@ const renderTableHeader = transactions => {
   </thead>;
 };
 
-const renderTableRow = (item, id) => {
+const renderTableRow = (item, id, pricing) => {
   return <tr key={id}>
     {Object.keys(item).map(category => <td key={category}>{item[category]}</td>)}
+    <td>{getSubsidy({ prices: [item.price] ,pricing })}</td>
   </tr>;
 };
 
-const renderTableBody = transactions => {
+const renderTableBody = (transactions, pricing) => {
   return <tbody>
-    {transactions.map((item, id) => renderTableRow(item, id))}
+    {transactions.map((item, id) => renderTableRow(item, id, pricing))}
   </tbody>
 }
 
-const renderTable = transactions => {
+const renderTable = (transactions, pricing) => {
   return <table>
     {renderTableHeader(transactions)}
-    {renderTableBody(transactions)}
+    {renderTableBody(transactions, pricing)}
   </table>;
 }
 
@@ -39,7 +40,7 @@ const MerchantDetails = ({ name, transactions, pricing }) => {
     <div className='c-merchant-details__total'>{transactions ? getTotal({ transactions }) : ''}</div>
     <div className='c-merchant-details__subsidy'>{transactions ? getSubsidy({ prices: transactions.map(item => item.price), pricing }) : ''}</div>
     <div className='c-merchant-details__count'>{transactions ? transactions.length : ''}</div>
-    {transactions ? renderTable(transactions) : ''}
+    {transactions ? renderTable(transactions, pricing) : ''}
   </article>;
 }
 

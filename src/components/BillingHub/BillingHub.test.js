@@ -28,14 +28,17 @@ describe('Billing hub', () => {
     const transactions = [
       {
         "description": "Soft Chips",
+        "date": "2019-03-09T13:37:54.146Z",
         "price": 100,
       },
       {
         "description": "Awesome Frozen Chips",
+        "date": "2019-03-12T13:37:54.146Z",
         "price": 200,
       },
       {
         "description": "Car",
+        "date": "2019-03-23T13:37:54.146Z",
         "price": 300,
       }
     ];
@@ -84,6 +87,9 @@ describe('Billing hub', () => {
 
     const subsidy = getByText('35');
     expect(subsidy).toBeInTheDocument();
+
+
+    const tableItems = document.querySelectorAll('td')
   });
 
 });

@@ -1,6 +1,8 @@
 import React from 'react';
 import './MerchantDetails.css';
 import { getSubsidy } from './subsidy.js';
+import { ReactComponent as PieSvg } from './Pie.svg';
+
 
 const getTotal = ({ transactions }) => transactions.reduce((acc, next) => acc + next.price, 0);
 
@@ -34,6 +36,40 @@ const renderTable = (transactions, pricing) => {
 }
 
 
+const getPieSvgStyle = (total, subsidy) => {
+  const radius = 52;
+  const circumference = radius * 2 * Math.PI;
+
+  const missingHealth = total - subsidy;
+  const getStrokeDashoffset = () => {
+    let strokeDashoffset;
+
+    if (subsidy === 0) {
+      strokeDashoffset = circumference;
+    } else if (missingHealth === 0) {
+      strokeDashoffset = 0;
+    } else {
+      const subsidyPerc = (subsidy / total) * 100;
+
+      strokeDashoffset = circumference - (subsidyPerc / 100) * circumference;
+    }
+
+    return strokeDashoffset;
+  }
+
+  return {
+    strokeDasharray: `${circumference} ${circumference}`,
+    strokeDashoffset: getStrokeDashoffset(),
+  };
+};
+
+
+const renderPie = (transactions, pricing) => {
+  if (transactions && pricing) {
+    return <PieSvg style={getPieSvgStyle(getTotal({transactions}), getSubsidy({ prices: transactions.map(item => item.price), pricing }))} tabIndex='0' />
+  }
+}
+
 const MerchantDetails = ({ name, transactions, pricing }) => {
   return <article className='c-merchant-details'>
     <section className='c-merchant-details__summary'>
@@ -60,7 +96,7 @@ const MerchantDetails = ({ name, transactions, pricing }) => {
         </section>
       </div>
       <div className='c-merchant-details__summary-pie'>
-        pie
+        {renderPie(transactions, pricing)}
       </div>
     </section>
     <div className='c-merchant-details__table-wrapper'>

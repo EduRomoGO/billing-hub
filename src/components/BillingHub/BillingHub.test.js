@@ -45,19 +45,22 @@ describe('Billing hub', () => {
         "price": 300,
       }
     ];
-    const respMerchantDetails = { data: {
-      transactions,
-      name: 'reale',
-      pricing: {
-        "subsidy": 10,
-        "discount_subsidy": 5,
-        "discount_cutoff": 200
-      },
-    } };
+    const respMerchantDetails = {
+      data: {
+        transactions,
+        name: 'reale',
+        pricing: {
+          "subsidy": 10,
+          "discount_subsidy": 5,
+          "discount_cutoff": 200
+        },
+      }
+    };
     const names = respMerchants.data.map(item => item.name);
 
     axios.get.mockResolvedValueOnce(respMerchants)
-      .mockResolvedValueOnce(respMerchantDetails);
+      .mockResolvedValueOnce(respMerchantDetails)
+      .mockResolvedValueOnce({...respMerchantDetails, data: { ...respMerchantDetails.data, name: 'axa'}});
     // ***************
 
 
@@ -85,8 +88,6 @@ describe('Billing hub', () => {
     // ***************
     // Merchant details asserts
     // ***************
-    fireEvent.click(getByText('reale'));
-    await wait();
 
     expect(axios.get).toHaveBeenCalledTimes(2);
     expect(getByText('Transactions')).toBeInTheDocument();
@@ -117,7 +118,20 @@ describe('Billing hub', () => {
 
     const tableRows = document.querySelectorAll('tr');
     expect(tableRows.length).toBe(4);
+    // ***************
+
+
+
+
+    // ***************
+    // Merchant click load new data
+    // ***************
+
+    fireEvent.click(getByText('axa'));
+    await wait();
+
+    expect(axios.get).toHaveBeenCalledTimes(3);
+    // expect(getAllByText('axa').length).toBe(2);
   });
-  // ***************
 
 });

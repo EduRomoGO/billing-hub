@@ -81,3 +81,22 @@ table {
 thead {
   background-color: #9393e8;
 }
+
+
+
+/* ************** */
+/* Summary pie */
+/* ************** */
+
+.progress-ring__circle {
+  transition: 0.35s stroke-dashoffset;
+  stroke: #11ad11;
+  stroke-width: 14px;
+  fill: transparent;
+  r: 52;
+  cx: 60;
+  cy: 60;
+  /* axis compensation */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}

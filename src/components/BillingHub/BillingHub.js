@@ -13,17 +13,21 @@ const BillingHub = () => {
         setMerchants(data);
         return data;
       })
-      .then(data => handleMerchantClick(data[0].merchant_id))
+      .then(data => requestMerchantDetail(data[0].merchant_id))
       .catch(err => { throw new Error(err) });
 
   }, []);
 
-  const handleMerchantClick = (merchant_id) => {
+  const requestMerchantDetail = merchant_id => {
     axios.get(`http://interview.dekopay.com.s3.eu-west-2.amazonaws.com/merchants/${merchant_id}.json`)
-      .then(({ data }) => {
-        setMerchantDetails(data);
-      })
-      .catch(err => { throw new Error(err) });
+    .then(({ data }) => {
+      setMerchantDetails(data);
+    })
+    .catch(err => { throw new Error(err) });
+  };
+
+  const handleMerchantClick = (merchant_id) => {
+    requestMerchantDetail(merchant_id);
   }
 
   const renderMerchantList = merchants => {

@@ -52,9 +52,15 @@
   padding-top: 1.5rem;
 }
 
-table, th, td {
-  border: 1px solid #333;
+table {
+  border: 2px solid black;
+  border-collapse: collapse;
   text-align: left;
+  width: 100%;
+}
+
+td, th {
+  border-left: 2px solid black;
 }
 
 th {
@@ -65,10 +71,6 @@ tbody tr:nth-child(odd) {
   background-color: lightgrey;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
 
 thead {
   background-color: #9393e8;

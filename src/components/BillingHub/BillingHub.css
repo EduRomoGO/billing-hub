@@ -4,13 +4,13 @@
 
 
 .c-billing-hub {
-  background-color: red;
   display: flex;
 }
 
 .c-billing-hub__aside {
   padding: 1.5rem;
   flex: 1 0 25%;
+  border-right: 2px solid black;
 }
 
 .c-billing-hub__main {

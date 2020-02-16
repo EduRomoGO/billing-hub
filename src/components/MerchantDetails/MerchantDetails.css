@@ -1,5 +1,4 @@
 .c-merchant-details {
-  background-color: blue;
   padding: 20px;
 }
 
@@ -11,7 +10,6 @@
 
 .c-merchant-details__summary {
   display: flex;
-  background: yellow;
 }
 
 .c-merchant-details__name {
@@ -21,7 +19,6 @@
 
 .c-merchant-details__summary-overview-wrapper {
   flex: 4 0 75%;
-  background-color: orange;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -31,7 +28,6 @@
 
 .c-merchant-details__overview {
   display: flex;
-  background-color: brown;
   width: 100%;
 }
 

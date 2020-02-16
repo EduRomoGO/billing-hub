@@ -31,7 +31,7 @@ const renderTableBody = (transactions, pricing) => {
 const renderTable = (transactions, pricing) => {
   return <table>
     {renderTableHeader(transactions)}
-    {renderTableBody(transactions, pricing)}
+    {renderTableBody(transactions.map(item => ({...item, date: item.date.substring(0,19).replace('T', ' ')})), pricing)}
   </table>;
 }
 

@@ -6,6 +6,7 @@ import MerchantDetails from '../MerchantDetails/MerchantDetails.js';
 const BillingHub = () => {
   const [merchants, setMerchants] = useState([]);
   const [merchantDetails, setMerchantDetails] = useState({});
+  const [merchantSelected, setMerchantSelected] = useState(undefined);
 
   useEffect(() => {
     axios.get('http://interview.dekopay.com.s3.eu-west-2.amazonaws.com/merchants.json')
@@ -13,7 +14,10 @@ const BillingHub = () => {
         setMerchants(data);
         return data;
       })
-      .then(data => requestMerchantDetail(data[0].merchant_id))
+      .then(data => {
+        requestMerchantDetail(data[0].merchant_id);
+        setMerchantSelected(data[0].merchant_id);
+      })
       .catch(err => { throw new Error(err) });
 
   }, []);
@@ -26,12 +30,17 @@ const BillingHub = () => {
     .catch(err => { throw new Error(err) });
   };
 
-  const handleMerchantClick = (merchant_id) => {
+  const handleMerchantClick = (merchant_id, e) => {
     requestMerchantDetail(merchant_id);
+    setMerchantSelected(merchant_id);
   }
 
   const renderMerchantList = merchants => {
-    return merchants.map(({ name, merchant_id }) => <li className='b-merchant-list__item' onClick={() => handleMerchantClick(merchant_id)} key={merchant_id}>{name}</li>);
+    const getClassName = (merchant_id, merchantSelected) => {
+      return `b-merchant-list__item ${(merchantSelected === merchant_id) ? 'selected' : ''}`;
+    }
+
+    return merchants.map(({ name, merchant_id }) => <li className={getClassName(merchant_id, merchantSelected)} onClick={e => handleMerchantClick(merchant_id, e)} key={merchant_id}>{name}</li>);
   }
 
   return <section className='c-billing-hub'>

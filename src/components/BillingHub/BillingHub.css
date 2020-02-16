@@ -50,3 +50,8 @@
 .b-merchants__title {
   text-align: left;
 }
+
+
+.selected {
+  font-weight: bold;
+}

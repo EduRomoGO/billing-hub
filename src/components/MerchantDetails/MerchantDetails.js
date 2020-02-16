@@ -37,22 +37,14 @@ const renderTable = (transactions, pricing) => {
 
 
 const getPieSvgStyle = (total, subsidy) => {
-  const radius = 52;
+  const radius = 29;
   const circumference = radius * 2 * Math.PI;
 
-  const missingHealth = total - subsidy;
   const getStrokeDashoffset = () => {
     let strokeDashoffset;
+    const subsidyPerc = (subsidy / total + subsidy) * 100;
 
-    if (subsidy === 0) {
-      strokeDashoffset = circumference;
-    } else if (missingHealth === 0) {
-      strokeDashoffset = 0;
-    } else {
-      const subsidyPerc = (subsidy / total) * 100;
-
-      strokeDashoffset = circumference - (subsidyPerc / 100) * circumference;
-    }
+    strokeDashoffset = circumference - (subsidyPerc / 100) * circumference;
 
     return strokeDashoffset;
   }
@@ -63,10 +55,11 @@ const getPieSvgStyle = (total, subsidy) => {
   };
 };
 
-
 const renderPie = (transactions, pricing) => {
   if (transactions && pricing) {
-    return <PieSvg style={getPieSvgStyle(getTotal({transactions}), getSubsidy({ prices: transactions.map(item => item.price), pricing }))} tabIndex='0' />
+    return <>
+      <PieSvg style={getPieSvgStyle(getTotal({ transactions }), getSubsidy({ prices: transactions.map(item => item.price), pricing }))} tabIndex='0' />
+    </>
   }
 }
 

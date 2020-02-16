@@ -43,10 +43,6 @@
   font-weight: bold;
 }
 
-.c-merchant-details__summary-pie {
-  flex: 1 0 25%;
-}
-
 
 
 
@@ -88,15 +84,29 @@ thead {
 /* Summary pie */
 /* ************** */
 
+.c-merchant-details__summary-pie {
+  flex: 1 0 25%;
+  position: relative;
+}
+
 .progress-ring__circle {
   transition: 0.35s stroke-dashoffset;
-  stroke: #11ad11;
-  stroke-width: 14px;
+  stroke: #5a4cde;
+  stroke-width: 58px;
   fill: transparent;
-  r: 52;
-  cx: 60;
-  cy: 60;
-  /* axis compensation */
+  r: 29;
+  cx: 149;
+  cy: 16;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring__circle-base {
+  /* transition: 0.35s stroke-dashoffset; */
+  fill: #ade3dd;
+  r: 58;
+  cx: 149;
+  cy: 16;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }

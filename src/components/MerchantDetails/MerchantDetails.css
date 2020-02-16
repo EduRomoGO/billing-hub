@@ -90,7 +90,6 @@ thead {
 }
 
 .progress-ring__circle {
-  transition: 0.35s stroke-dashoffset;
   stroke: #5a4cde;
   stroke-width: 58px;
   fill: transparent;
@@ -102,7 +101,6 @@ thead {
 }
 
 .progress-ring__circle-base {
-  /* transition: 0.35s stroke-dashoffset; */
   fill: #ade3dd;
   r: 58;
   cx: 149;
